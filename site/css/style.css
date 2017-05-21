@@ -1,6 +1,7 @@
 
 .container-fluid {
 	background-color: #3A3A3A;
+	height: 225px;
 }
 
 #banner {
@@ -11,6 +12,8 @@
 	background-size: 2000px;
 	background-attachment:	fixed;
 	margin-bottom: 55px;
+	z-index: 1;
+	position: relative;
 }
 
 #semi_circle {
@@ -36,27 +39,59 @@
 	margin-top: -30px;
 }
 
+#egg_area {
+	position: relative;
+	margin-top: -185px;
+	z-index: 0;
+}
+
+#egg_img {
+	position: relative;
+	width: 100px;
+	-ms-transform: rotate(180deg); /* IE 9 */
+    -webkit-transform: rotate(180deg); /* Chrome, Safari, Opera */
+    transform: rotate(180deg);
+    z-index: 0;
+}
+
+#intro_area {
+	font-size: large;
+	height: 500px;
+}
+
 #title {
 	text-align: center;
 	margin: 0 auto;
-	margin-top: 50px;
-	width: 40%;
 	color: white;
 	text-decoration: underline;
+	width: 250px;
+	margin-top: 80px;
+	padding-top: 3px;
+	z-index: 2;
+	position: relative;
 }
 
 #introduction {
 	text-align: center;
 	margin: 0 auto;
-	margin-top: 55px;
-	width: 68%;
+	width: 800px;
 	color: white;
-	margin-top: -9px;
+	margin-top: 5px;
 }
 
-#intro_area {
-	height: 150px;
-	font-size: large;
+#bacon_area {
+	position: relative;
+}
+
+#bacon_img {
+	position: relative;
+	width: 100px;
+	-moz-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+    filter: FlipH;
+    -ms-filter: "FlipH";
 }
 
 #map_area {
