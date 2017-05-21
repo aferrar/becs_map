@@ -41,8 +41,9 @@
 
 #egg_area {
 	position: relative;
-	margin-top: -185px;
+	margin-top: -175px;
 	z-index: 0;
+	margin-right: 25px;
 }
 
 #egg_img {
@@ -81,6 +82,7 @@
 
 #bacon_area {
 	position: relative;
+	margin-top:-10px;
 }
 
 #bacon_img {
