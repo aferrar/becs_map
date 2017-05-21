@@ -1,0 +1,85 @@
+
+.container-fluid {
+	background-color: #3A3A3A;
+}
+
+#banner {
+	height:200px;
+	background-image: url("../img/bannerbackground3.png");	/* Image is licensed for reuse and modification via Google Images */
+	background-position: -50px 400px;
+	background-color: white;
+	background-size: 2000px;
+	background-attachment:	fixed;
+	margin-bottom: 55px;
+}
+
+#semi_circle {
+	height: 250px;
+	width: 250px;
+	border-radius: 125px;		/* Semi-circle is created by taking advantage of overflow into intro section and border-radius/width manipulation. */
+	background-color: #3A3A3A;
+	margin: 0 auto;	
+	margin-top: 65px;
+}
+
+#circle_text {
+	text-align: center;
+	font-weight: bold;
+	font-size: 20px;
+	color: white;
+	padding-top: 40px; 
+}
+
+#circle_img {
+	width: 225px;
+	height: auto;
+	margin-top: -30px;
+}
+
+#title {
+	text-align: center;
+	margin: 0 auto;
+	margin-top: 50px;
+	width: 40%;
+	color: white;
+	text-decoration: underline;
+}
+
+#introduction {
+	text-align: center;
+	margin: 0 auto;
+	margin-top: 55px;
+	width: 68%;
+	color: white;
+	margin-top: -9px;
+}
+
+#intro_area {
+	height: 150px;
+	font-size: large;
+}
+
+#map_area {
+	width: 100%;
+	margin: 0 0;
+	height: 55%;
+}
+
+#map {
+	position: absolute;
+  	width: 100%;
+  	height: 55%;
+	margin-left: auto;
+	margin-right: auto;
+	left: 0;
+	right: 0;  	
+	border:  0.5px solid;
+	background-color: gray;
+	z-index: 0;
+}
+
+#reset {
+	width: 500px;
+	z-index: 100;
+}
+

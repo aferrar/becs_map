@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>BECs Web Map</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="lib/leaflet/leaflet.css" />
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link rel="icon" href="img/sandwichfavs/favicon-16x16.png" type="image/png" />
+    <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+  </head>
+  <body>
+<!-- div containing banner and half circle title area. Container-fluid is a bootstrap class spanning entire page width-->
+    <div class="container-fluid">
+      <div class="row" id="banner">
+        <div id="semi_circle">
+          <div id="circle_text">
+            <img src="img/baconeggwhite.png" id="circle_img" ></img>          
+          </div>
+        </div>
+      </div>
+    </div>
+<!-- Introduction section. -->
+    <div class="container-fluid">
+      <div class="row" id="intro_area">
+        <div id="title">
+          <p>BECS WEB MAP</p>
+        </div>
+        <div id="introduction">
+        <p>Hello! Welcome to the Bacon, Egg, and Cheese Sandwich Web Map! The map below will allow you to search for the best deals on your favorite breakfast sandwich!<br /> Simply click a location anywhere within the 5 boroughs to reveal its nearest delis. By clicking each of the revealed markers you can view more details about each specific deli. 
+      </div>
+    </div>
+<!-- Map area created -->
+    <div class="container-fluid">
+      <div id="map"></div>
+    </div>
+
+<!-- Included leaflet, jquery, and bootstrap js libraries -->
+    <script src="lib/leaflet/leaflet.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <script>
+//Create Leaflet map object
+var map = L.map('map',{ center: [40.730610, -73.935242], zoom: 10});
+
+// Add Tile Layer basemap
+L.tileLayer('http://korona.geog.uni-heidelberg.de/tiles/roads/x={x}&y={y}&z={z}', {
+    minZoom: 10
+
+}).addTo(map);
+
+// Set Hunter College Icon & Location
+var hunterIcon = L.icon({
+    iconUrl: 'img/hunter_marker.jpg',
+    iconSize:     [30, 30], // size of the icon
+    iconAnchor:   [22, 22], // point of the icon which will correspond to marker's location
+    popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+});
+
+// Add icon to map view
+L.marker([40.768541, -73.964625], {icon: hunterIcon}).addTo(map);
+
+
+// Declare Variables
+// variable to hold deli locations
+var deliLocations = null;
+
+// Database Queries
+// Get all delis from dataset
+var sqlQuery = "SELECT * FROM delis_all";
+
+// Set CartoDB Username
+var cartoDBUserName = "aferrar90";
+
+// Find five closest delis
+
+// Set Global Variable that will hold your location
+var myLocation = null;
+
+// Set Global Variable that will hold the marker that goes at our location when found
+var locationMarker = null;
+
+// Set 'Your Location' icon
+var redIcon = L.icon({
+    iconUrl: 'img/redIcon.png',
+    shadowUrl: 'img/marker-shadow.png',
+    iconAnchor: [13, 41]
+});
+
+// Listen for a click event on the Map element
+map.on('click', locationFindonClick);
+
+// Function that will run when the location of the user is found
+function locationFindonClick(e){
+    myLocation = e.latlng;
+    closestDeli(); 
+    locationMarker = L.marker(e.latlng, {icon: redIcon});
+    map.addLayer(locationMarker); 
+};
+
+// Function will find and load the five nearest delis to a user location
+function closestDeli(){
+  // Set SQL Query that will return five closest delis
+  var sqlQueryClosest = "SELECT * FROM delis_all ORDER BY the_geom <-> ST_SetSRID(ST_MakePoint("+myLocation.lng+","+myLocation.lat+"), 4326) LIMIT 5";
+
+  // remove deliLocations if on map
+  if(map.hasLayer(deliLocations)){
+    map.removeLayer(deliLocations);
+  };
+
+  // remove locationMarker if on map
+  if(map.hasLayer(locationMarker)){
+    map.removeLayer(locationMarker);
+  };
+
+  // Get GeoJSON of five closest points to the user
+  $.getJSON("https://"+cartoDBUserName+".carto.com/api/v2/sql?format=GeoJSON&q="+sqlQueryClosest, function(data) {
+    deliLocations = L.geoJson(data,{
+      onEachFeature: function (feature, layer) {
+        layer.bindPopup('<h4>' + 'Deli Name: ' + feature.properties.name + '<hr>' + 'Bacon Egg & Cheese Price: ' + feature.properties.price + '</text-align</h4>');
+        layer.cartodb_id=feature.properties.cartodb_id;
+      }
+    }).addTo(map);
+  });
+};
+
+    </script>
+  </body>
+</html>
