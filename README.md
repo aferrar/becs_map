@@ -38,4 +38,4 @@ Adrian Ferrar
 ___
 ### Acknowledgments
 ___
-Special thanks to everyone over at StackOverFlow who took the time to help me debug issues and to my professor and fellow classmates.
+Special thanks to my professor and fellow classmates, everyone over at Stackoverflow who helped me debug issues, and to PurpleBooth for their README-Template.
