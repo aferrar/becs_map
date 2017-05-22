@@ -8,6 +8,7 @@ These instructions will get you a copy of the project up and running on your loc
 ___
 Here are some of the resources used to create this service.
 * Python 3 or another server application with POST support.
+* Text Editor/IDE
 * A Browser
 ___
 ### Installing
