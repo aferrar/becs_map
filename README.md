@@ -43,4 +43,4 @@ Special thanks to my professor and fellow classmates, everyone over at Stackover
 ___
 ### Further Improvements
 ___
-Include a second sql call to restaurant dataset in Carto. Include toggle button to alternate between datasets on click. Expand both datasets to include more properties. Include realsitic pricing through store surveying, data mining or scraping. Improve popup HTML. Cuzstomize popup markers from leaflet default to sandwich asset in img folder.  
+Include a second sql call to restaurant dataset in Carto. Include toggle button to alternate between datasets on click. Expand both datasets to include more properties. Include realsitic pricing through store surveying, data mining or scraping. Improve popup HTML.
