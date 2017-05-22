@@ -46,7 +46,7 @@
       <div id="map"></div>
     </div>
 
-<!-- Included leaflet, jquery, and bootstrap js libraries -->
+<!-- Pulled leaflet locally leaflet. jquery and bootstrap js libraries from external source-->
     <script src="lib/leaflet/leaflet.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
@@ -84,25 +84,27 @@ var sqlQuery = "SELECT * FROM delis_all";
 // Set CartoDB Username
 var cartoDBUserName = "aferrar90";
 
-// Find five closest delis
 
-// Set Global Variable that will hold your location
+// Set Global Variable for location
 var myLocation = null;
 
-// Set Global Variable that will hold the marker that goes at our location when found
+// Set Global Variable for marker on our location
 var locationMarker = null;
 
-// Set 'Your Location' icon
+// Set location icon
 var redIcon = L.icon({
     iconUrl: 'img/redIcon.png',
     shadowUrl: 'img/marker-shadow.png',
     iconAnchor: [13, 41]
 });
 
-// Listen for a click event on the Map element
+// Listen for a click event on map element
 map.on('click', locationFindonClick);
 
-// Function that will run when the location of the user is found
+// Function that will set my lat/long of point click to global variable myLocation
+// Run function closestDeli()
+// Set global locationMarker as leaflet marker with click pt lat/lng and icon img
+// Add to map
 function locationFindonClick(e){
     myLocation = e.latlng;
     closestDeli(); 
@@ -110,22 +112,26 @@ function locationFindonClick(e){
     map.addLayer(locationMarker); 
 };
 
-// Function will find and load the five nearest delis to a user location
+// Function that will will find and load five nearest delis to point click
 function closestDeli(){
-  // Set SQL Query that will return five closest delis
+  // Set SQL query to be sent to Carto. Selecting from all records in deli dataset ordered by their geometry properties
+  // Setting points in WGS 84 and selecting for five closest records 
   var sqlQueryClosest = "SELECT * FROM delis_all ORDER BY the_geom <-> ST_SetSRID(ST_MakePoint("+myLocation.lng+","+myLocation.lat+"), 4326) LIMIT 5";
 
-  // remove deliLocations if on map
+  // Remove deliLocations layer if on map
   if(map.hasLayer(deliLocations)){
     map.removeLayer(deliLocations);
   };
 
-  // remove locationMarker if on map
+  // remove locationMarker layer if on map
   if(map.hasLayer(locationMarker)){
     map.removeLayer(locationMarker);
   };
 
-  // Get GeoJSON of five closest points to the user
+  // Sending query to Carto with username and query variable. Retrieve GeoJSON response from Carto 
+  // Set deliLocations global to geoJson object to parse with onEachFeature
+  // Create formatting for popup displaying deli name and price with html constructors and feature properties
+  // Set Carto id and add to map
   $.getJSON("https://"+cartoDBUserName+".carto.com/api/v2/sql?format=GeoJSON&q="+sqlQueryClosest, function(data) {
     deliLocations = L.geoJson(data,{
       onEachFeature: function (feature, layer) {
