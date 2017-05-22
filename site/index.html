@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="lib/leaflet/leaflet.css" />
     <link rel="stylesheet" type="text/css" href="/css/style.css">
     <link rel="icon" href="img/sandwichfavs/favicon-16x16.png" type="image/png" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
   </head>
   <body>
@@ -56,7 +56,9 @@
 var map = L.map('map',{ center: [40.730610, -73.935242], zoom: 10});
 
 // Add Tile Layer basemap
-L.tileLayer('http://korona.geog.uni-heidelberg.de/tiles/roads/x={x}&y={y}&z={z}', {
+
+L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
+  attribution: 'Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012',
     minZoom: 10
 
 }).addTo(map);
