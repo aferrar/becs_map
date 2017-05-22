@@ -1,4 +1,21 @@
 
+@font-face { 
+	font-family: 'goodtime'; 
+	src: url('../img/fonts/goodtime/KGAlwaysAGoodTime.ttf'); 
+	format: ("truetype"); 
+}
+
+@font-face { 
+	font-family: 'headup'; 
+	src: url('../img/fonts/headup/KGKeepYourHeadUp.ttf'); 
+	format: ("truetype"); 
+}
+
+@font-face { 
+	font-family: 'raindrop'; 
+	src: url('../img/fonts/raindrop/BlessingsthroughRaindrops.ttf'); 
+	format: ("truetype"); 
+}
 .container-fluid {
 	background-color: #3A3A3A;
 	height: 225px;
@@ -77,7 +94,13 @@
 	margin: 0 auto;
 	width: 800px;
 	color: white;
-	margin-top: 5px;
+	margin-top: -5px; 
+}
+
+p {
+	font-family: 'headup';
+	color: white;
+	font-size: 18px;
 }
 
 #bacon_area {
@@ -113,10 +136,5 @@
 	border:  0.5px solid;
 	background-color: gray;
 	z-index: 0;
-}
-
-#reset {
-	width: 500px;
-	z-index: 100;
 }
 
