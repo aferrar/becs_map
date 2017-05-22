@@ -100,6 +100,13 @@ var redIcon = L.icon({
     iconAnchor: [13, 41]
 });
 
+// Set sandwich icon for retrieved deli locations
+var sandwich = L.icon({
+    iconUrl: 'img/sandwich.png',
+    iconAnchor: [25, 0],
+    iconSize: [40, 40]
+})
+
 // Listen for a click event on map element
 map.on('click', locationFindonClick);
 
@@ -120,25 +127,26 @@ function closestDeli(){
   // Setting points in WGS 84 and selecting for five closest records 
   var sqlQueryClosest = "SELECT * FROM delis_all ORDER BY the_geom <-> ST_SetSRID(ST_MakePoint("+myLocation.lng+","+myLocation.lat+"), 4326) LIMIT 5";
 
-  // Remove deliLocations layer if on map
+  // Remove deliLocations layer for instances after initial click
   if(map.hasLayer(deliLocations)){
     map.removeLayer(deliLocations);
   };
 
-  // remove locationMarker layer if on map
+  // remove locationMarker layer for instances after initial click
   if(map.hasLayer(locationMarker)){
     map.removeLayer(locationMarker);
   };
 
   // Sending query to Carto with username and query variable. Retrieve GeoJSON response from Carto 
   // Set deliLocations global to geoJson object to parse with onEachFeature
+  // Set icon for each retrieved layer from the default to our sandwich icon
   // Create formatting for popup displaying deli name and price with html constructors and feature properties
   // Set Carto id and add to map
   $.getJSON("https://"+cartoDBUserName+".carto.com/api/v2/sql?format=GeoJSON&q="+sqlQueryClosest, function(data) {
     deliLocations = L.geoJson(data,{
       onEachFeature: function (feature, layer) {
+        layer.setIcon(sandwich);
         layer.bindPopup('<h4>' + 'Deli Name: ' + feature.properties.name + '<hr>' + 'Bacon Egg & Cheese Price: ' + feature.properties.price + '</text-align</h4>');
-        layer.cartodb_id=feature.properties.cartodb_id;
       }
     }).addTo(map);
   });
