@@ -50,30 +50,18 @@
     <script src="lib/leaflet/leaflet.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="http://maps.stamen.com/js/tile.stamen.js?v1.3.0"></script>
 
     <script>
 //Create Leaflet map object
-var map = L.map('map',{ center: [40.730610, -73.935242], zoom: 10});
 
+var map = L.map('map',{ center: [40.730610, -73.935242], zoom: 10});
 // Add Tile Layer basemap
 
-L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
-  attribution: 'Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012',
+L.tileLayer('http://tile.stamen.com/terrain/{z}/{x}/{y}.jpg', {
     minZoom: 10
 
 }).addTo(map);
-
-// Set Hunter College Icon & Location
-var hunterIcon = L.icon({
-    iconUrl: 'img/hunter_marker.jpg',
-    iconSize:     [30, 30], // size of the icon
-    iconAnchor:   [22, 22], // point of the icon which will correspond to marker's location
-    popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
-});
-
-// Add icon to map view
-L.marker([40.768541, -73.964625], {icon: hunterIcon}).addTo(map);
-
 
 // Declare Variables
 // variable to hold deli locations

@@ -67,7 +67,13 @@
 	position: relative;
 	width: 100px;
 	top: 200px;
-    z-index: 0;
+	z-index: 0;
+	-moz-transform: scaleX(-1);
+	-o-transform: scaleX(-1);
+	-webkit-transform: scaleX(-1);
+	transform: scaleX(-1);
+	filter: FlipH;
+	-ms-filter: "FlipH";
 }
 
 #intro_area {
@@ -140,7 +146,7 @@ p {
 	#egg_img {
 		position: relative;
 		width: 75px;
-		left: -45px;
+		left: -40px;
 		top: 20px;
 		z-index: 0;
 		-ms-transform: rotate(180deg);  /*IE 9 */
