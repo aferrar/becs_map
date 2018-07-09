@@ -66,9 +66,7 @@
 #egg_img {
 	position: relative;
 	width: 100px;
-	-ms-transform: rotate(180deg); /* IE 9 */
-    -webkit-transform: rotate(180deg); /* Chrome, Safari, Opera */
-    transform: rotate(180deg);
+	top: 200px;
     z-index: 0;
 }
 
@@ -138,3 +136,56 @@ p {
 	z-index: 0;
 }
 
+@media only screen and (max-width: 600px) { 
+	#egg_img {
+		position: relative;
+		width: 75px;
+		left: -45px;
+		top: 20px;
+		z-index: 0;
+		-ms-transform: rotate(180deg);  /*IE 9 */
+    	-webkit-transform: rotate(180deg); /* Chrome, Safari, Opera */
+    	transform: rotate(180deg);
+	}
+
+	#bacon_img {
+		position: relative;
+		width: 75px;
+		top: -135px;
+		-moz-transform: scaleX(-1);
+		-o-transform: scaleX(-1);
+		-webkit-transform: scaleX(-1);
+		transform: scaleX(-1);
+		filter: FlipH;
+		-ms-filter: "FlipH";
+		-ms-transform: rotate(180deg);  /*IE 9 */
+    	-webkit-transform: rotate(180deg); /* Chrome, Safari, Opera */
+    	transform: rotate(180deg);
+	}
+
+	p {
+		font-size: 12.5px;
+	}
+
+	#introduction {
+		text-align: center;
+		margin: 0 auto;
+		width: 2000px;
+		color: white;
+		margin-top: -5px; 
+	}
+
+	#bacon_area {
+		position: relative;
+		margin-top:-10px;
+		width: 25px;
+	}
+
+	#egg_area {
+		position: relative;
+		margin-top: -175px;
+		z-index: 0;
+		width: 10px;
+	}
+
+}
