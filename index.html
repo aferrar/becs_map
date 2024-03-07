@@ -58,7 +58,7 @@
 var map = L.map('map',{ center: [40.706691, -73.988494], zoom: 14});
 // Add Tile Layer basemap
 
-L.tileLayer('https://stamen-tiles.a.ssl.fastly.net/terrain/{z}/{x}/{y}.jpg', {
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     minZoom: 10
 
 }).addTo(map);
