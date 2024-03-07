@@ -166,7 +166,7 @@ p {
 	}
 
 	p {
-		font-size: 12.5px;
+		font-size: 8.5px;
 	}
 
 	#introduction {
@@ -188,6 +188,18 @@ p {
 		margin-top: -175px;
 		z-index: 0;
 		width: 10px;
+	}
+
+	#title {
+		text-align: center;
+		margin: 0 auto;
+		color: white;
+		text-decoration: underline;
+		width: 250px;
+		margin-top: 10vh;
+		padding-top: 6.5vh;
+		z-index: 2;
+		position: relative;
 	}
 
 }
